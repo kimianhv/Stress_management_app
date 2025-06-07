@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stress_management_app/calming_playlist_page.dart';
 import 'package:stress_management_app/home_screen.dart';
 import 'package:stress_management_app/start_screen.dart';
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StartScreen(),
+      home: CalmingPlaylistPage(),
 
     );
 
