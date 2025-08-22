@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home1_screen.dart';
+
 class QuestionFiveScreen extends StatelessWidget {
   const QuestionFiveScreen({super.key});
 
@@ -53,6 +55,10 @@ class QuestionFiveScreen extends StatelessWidget {
   Widget _optionBox(BuildContext context, String text, Color color) {
     return GestureDetector(
       onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const Home1Screen()),
+        );
         // پایان سوالات، اینجا می‌توانید نتیجه را نمایش دهید
       },
       child: Container(
