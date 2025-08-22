@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'questionone_screen.dart'; // ✅ اضافه شد
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -10,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 🔹 بالای سفید
+            // بالای سفید
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
@@ -27,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
 
-            // 🔹 باکس یاسی
+            // باکس یاسی
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
@@ -49,10 +50,9 @@ class SignUpScreen extends StatelessWidget {
                   _buildTextField("ایمیل"),
                   const SizedBox(height: 20),
                   _buildTextField("تلفن همراه"),
-
                   const SizedBox(height: 25),
-                  _buildMainButton("ثبت نام", Colors.purple),
-
+                  // ✅ دکمه ثبت نام -> انتقال به صفحه سوال اول
+                  _buildMainButton(context, "ثبت نام", Colors.purple),
                   const SizedBox(height: 25),
                   _buildGoogleButton(),
                 ],
@@ -73,7 +73,7 @@ class SignUpScreen extends StatelessWidget {
         border: Border.all(color: Colors.black26, width: 1.2),
       ),
       child: TextField(
-        textAlign: TextAlign.right, // 👈 این خط اضافه شد (راست‌چین شدن متن)
+        textAlign: TextAlign.right,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
@@ -86,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMainButton(String text, Color color) {
+  Widget _buildMainButton(BuildContext context, String text, Color color) {
     return SizedBox(
       width: double.infinity,
       height: 55,
@@ -97,7 +97,12 @@ class SignUpScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const QuestionOneScreen()),
+          );
+        },
         child: Text(
           text,
           style: const TextStyle(

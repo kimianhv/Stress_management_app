@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'questionone_screen.dart'; // ✅ اضافه شد
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -6,7 +7,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // 👈 اجازه میده وقتی کیبورد باز شد، محتوا بالا بره
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -42,13 +43,9 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  // 🔹 نام کاربری
                   _buildTextField("نام کاربری"),
-
                   const SizedBox(height: 20),
-                  // 🔹 رمز عبور
                   _buildTextField("رمز عبور"),
-
                   const SizedBox(height: 10),
                   const Align(
                     alignment: Alignment.centerRight,
@@ -61,13 +58,10 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 25),
-                  // 🔹 دکمه ورود
-                  _buildMainButton("ورود", Colors.blue),
-
+                  // 🔹 دکمه ورود -> انتقال به صفحه سوال اول
+                  _buildMainButton(context, "ورود", Colors.blue),
                   const SizedBox(height: 25),
-                  // 🔹 دکمه ورود با گوگل
                   _buildGoogleButton(),
                 ],
               ),
@@ -87,7 +81,7 @@ class SignInScreen extends StatelessWidget {
         border: Border.all(color: Colors.black26, width: 1.2),
       ),
       child: TextField(
-        textAlign: TextAlign.right, // 👈 این خط اضافه شد (راست‌چین شدن متن)
+        textAlign: TextAlign.right,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
@@ -100,7 +94,7 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMainButton(String text, Color color) {
+  Widget _buildMainButton(BuildContext context, String text, Color color) {
     return SizedBox(
       width: double.infinity,
       height: 55,
@@ -111,7 +105,13 @@ class SignInScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          // ✅ انتقال به صفحه سوال اول
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const QuestionOneScreen()),
+          );
+        },
         child: Text(
           text,
           style: const TextStyle(
