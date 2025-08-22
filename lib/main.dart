@@ -6,6 +6,11 @@ import 'introthree_screen.dart';
 import 'welcome_screen.dart';
 import 'signin_screen.dart';
 import 'signup_screen.dart';
+import 'questionone_screen.dart';
+import 'questiontwo_screen.dart';
+import 'questionthree_screen.dart';
+import 'questionfour_screen.dart';
+import 'questionfive_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +21,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }
@@ -56,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// ================= IntroScreen =================
+// ================= Intro Screens =================
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 
@@ -76,6 +81,7 @@ class _IntroScreenState extends State<IntroScreen> {
         curve: Curves.easeInOut,
       );
     } else if (currentPage == 2) {
+      // بعد از اینترو سوم میره به Welcome
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const WelcomeScreen()),
@@ -121,7 +127,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 ],
               ),
             ),
-            // Indicator
+            // Indicators
             Positioned(
               bottom: 120,
               child: Row(
@@ -144,7 +150,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 }),
               ),
             ),
-            // فلش‌ها با سر داخل
+            // Navigation arrows
             if (currentPage == 0) ...[
               Positioned(
                 bottom: 50,
@@ -193,5 +199,46 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ),
     );
+  }
+}
+
+// ================= Question Flow =================
+class QuestionNavigator {
+  /// شروع مسیر پرسش‌ها از صفحه اول
+  static void startQuestionFlow(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const QuestionOneScreen()),
+    );
+  }
+
+  /// رفتن به صفحات بعدی پرسش‌ها
+  static void nextQuestion(BuildContext context, int currentPage) {
+    if (currentPage == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const QuestionTwoScreen()),
+      );
+    } else if (currentPage == 2) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const QuestionThreeScreen()),
+      );
+    } else if (currentPage == 3) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const QuestionFourScreen()),
+      );
+    } else if (currentPage == 4) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const QuestionFiveScreen()),
+      );
+    } else if (currentPage == 5) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+      );
+    }
   }
 }
